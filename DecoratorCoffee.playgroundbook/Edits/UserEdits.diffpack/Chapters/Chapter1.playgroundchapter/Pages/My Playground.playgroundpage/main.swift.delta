@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>
+//MARK: - Coffee
+
+protocol Coffee {
+    var price: Int { get }
+}
+class SimpeCoffee: Coffee {
+    var price: Int {
+        return 200
+    }
+}
+
+protocol CoffeeDecorator: Coffee {
+    var base: Coffee {get}
+    init(base: Coffee)
+}
+class Milk: CoffeeDecorator {
+    var base: Coffee
+    required init(base: Coffee) {
+        self.base = base 
+    }
+    var price: Int {
+        base.price + 30
+    }
+}
+
+class Whip: CoffeeDecorator {
+    var base: Coffee 
+    required init(base: Coffee) {
+        self.base = base 
+    }
+    var price: Int {
+        base.price + 50
+    }
+}
+
+class Sugar: CoffeeDecorator {
+    var base: Coffee 
+    required init(base: Coffee) {
+        self.base = base
+    }
+    
+    var price: Int {
+        base.price + 20
+    }
+}
+let simpleCoffee = SimpeCoffee()
+let CoffeeWithMilk = Milk(base: simpleCoffee)
+let coffeeWithMilkWhip = Whip(base: CoffeeWithMilk)
+let coffeeWithMilkWhipSugar = Sugar(base: coffeeWithMilkWhip)
+
+print ("Обычное кофе: \(simpleCoffee.price), Кофе с молоком: \(CoffeeWithMilk.price), Кофе(молоко+сливки)\(coffeeWithMilkWhip.price), кофе(молок+сливки+сахар) \(coffeeWithMilkWhipSugar.price)")
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 1137}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
